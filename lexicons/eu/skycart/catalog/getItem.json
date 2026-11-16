@@ -1,0 +1,58 @@
+{
+  "lexicon": 1,
+  "id": "eu.skycart.catalog.getItem",
+  "defs": {
+    "main": {
+      "type": "query",
+      "description": "One item with its store, its variants and offers of the same GTIN from other shops.",
+      "parameters": {
+        "type": "params",
+        "required": [
+          "uri"
+        ],
+        "properties": {
+          "uri": {
+            "type": "string",
+            "format": "at-uri"
+          }
+        }
+      },
+      "output": {
+        "encoding": "application/json",
+        "schema": {
+          "type": "object",
+          "required": [
+            "item",
+            "store",
+            "variants",
+            "offers"
+          ],
+          "properties": {
+            "item": {
+              "type": "ref",
+              "ref": "eu.skycart.defs#itemView"
+            },
+            "store": {
+              "type": "ref",
+              "ref": "eu.skycart.defs#storeView"
+            },
+            "variants": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "ref": "eu.skycart.defs#itemView"
+              }
+            },
+            "offers": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "ref": "eu.skycart.defs#itemView"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

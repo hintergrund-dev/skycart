@@ -1,0 +1,8 @@
+{
+  "name": "skycart",
+  "private": true,
+  "scripts": {
+    "typecheck": "pnpm -r typecheck",
+    "build": "pnpm -r build"
+  }
+}

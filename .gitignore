@@ -1,0 +1,7 @@
+node_modules
+.wrangler
+.svelte-kit
+build
+dist
+.dev.vars
+.env*

@@ -1,0 +1,392 @@
+{
+  "lexicon": 1,
+  "id": "eu.skycart.defs",
+  "defs": {
+    "storeSummary": {
+      "type": "object",
+      "required": [
+        "did",
+        "name",
+        "country",
+        "shippingInfoUrl"
+      ],
+      "properties": {
+        "did": {
+          "type": "string",
+          "format": "did"
+        },
+        "handle": {
+          "type": "string",
+          "format": "handle"
+        },
+        "name": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "description": "ISO 3166-1 alpha-2 country code."
+        },
+        "logo": {
+          "type": "string",
+          "format": "uri"
+        },
+        "shippingInfoUrl": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "reputation": {
+      "type": "object",
+      "required": [
+        "reviewCount"
+      ],
+      "properties": {
+        "reviewCount": {
+          "type": "integer"
+        },
+        "averageRating": {
+          "type": "string",
+          "description": "Decimal string, e.g. \"4.6\". Absent without reviews."
+        },
+        "verifiedShare": {
+          "type": "string",
+          "description": "Share of reviews with a verified purchase, 0 to 1, as decimal string."
+        },
+        "replyRate": {
+          "type": "string",
+          "description": "Share of reviews with a reply from the shop, 0 to 1, as decimal string."
+        }
+      }
+    },
+    "vatNote": {
+      "type": "object",
+      "description": "Plain-language VAT note shown next to the price.",
+      "required": [
+        "de",
+        "en"
+      ],
+      "properties": {
+        "de": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      }
+    },
+    "itemView": {
+      "type": "object",
+      "required": [
+        "uri",
+        "cid",
+        "store",
+        "title",
+        "priceCents",
+        "currency",
+        "vatRateBasisPoints",
+        "vatNote",
+        "shippingInfoUrl",
+        "deliveryTime",
+        "stockStatus",
+        "images",
+        "category",
+        "condition",
+        "checkoutUrl",
+        "createdAt"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "at-uri"
+        },
+        "cid": {
+          "type": "string",
+          "format": "cid"
+        },
+        "store": {
+          "type": "ref",
+          "ref": "#storeSummary"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "priceCents": {
+          "type": "integer"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "vatRateBasisPoints": {
+          "type": "integer"
+        },
+        "vatNote": {
+          "type": "ref",
+          "ref": "#vatNote"
+        },
+        "shippingInfoUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "basePriceInfo": {
+          "type": "string"
+        },
+        "deliveryTime": {
+          "type": "string"
+        },
+        "stockStatus": {
+          "type": "string"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description": "Blob URLs on the shop's own atproto server."
+        },
+        "category": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "gtin": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "manufacturer": {
+          "type": "object",
+          "required": [
+            "name",
+            "address",
+            "contact"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "contact": {
+              "type": "string"
+            }
+          }
+        },
+        "checkoutUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "datetime"
+        }
+      }
+    },
+    "storeView": {
+      "type": "object",
+      "required": [
+        "did",
+        "name",
+        "country",
+        "imprintUrl",
+        "termsUrl",
+        "withdrawalPolicyUrl",
+        "privacyUrl",
+        "shippingInfoUrl",
+        "shippingCountries",
+        "reputation",
+        "createdAt"
+      ],
+      "properties": {
+        "did": {
+          "type": "string",
+          "format": "did"
+        },
+        "handle": {
+          "type": "string",
+          "format": "handle"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string",
+          "format": "uri"
+        },
+        "country": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "description": "ISO 3166-1 alpha-2 country code."
+        },
+        "imprintUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "termsUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "withdrawalPolicyUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "privacyUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "shippingInfoUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "shippingCountries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
+            "description": "ISO 3166-1 alpha-2 country code."
+          }
+        },
+        "reputation": {
+          "type": "ref",
+          "ref": "#reputation"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "datetime"
+        }
+      }
+    },
+    "replyView": {
+      "type": "object",
+      "required": [
+        "uri",
+        "text",
+        "createdAt"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "at-uri"
+        },
+        "text": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "datetime"
+        }
+      }
+    },
+    "reviewView": {
+      "type": "object",
+      "required": [
+        "uri",
+        "cid",
+        "author",
+        "store",
+        "rating",
+        "verified",
+        "createdAt",
+        "replies"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "at-uri"
+        },
+        "cid": {
+          "type": "string",
+          "format": "cid"
+        },
+        "author": {
+          "type": "object",
+          "required": [
+            "did"
+          ],
+          "properties": {
+            "did": {
+              "type": "string",
+              "format": "did"
+            },
+            "handle": {
+              "type": "string",
+              "format": "handle"
+            }
+          }
+        },
+        "store": {
+          "type": "string",
+          "format": "did"
+        },
+        "item": {
+          "type": "string",
+          "format": "at-uri"
+        },
+        "rating": {
+          "type": "integer"
+        },
+        "text": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "True when the review carries a valid purchase proof from the shop."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "datetime"
+        },
+        "replies": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "ref": "#replyView"
+          }
+        }
+      }
+    },
+    "categoryView": {
+      "type": "object",
+      "required": [
+        "id",
+        "labelDe",
+        "labelEn",
+        "count"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "labelDe": {
+          "type": "string"
+        },
+        "labelEn": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

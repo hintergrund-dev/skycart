@@ -1,0 +1,37 @@
+{
+  "lexicon": 1,
+  "id": "eu.skycart.wishlist",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "A wishlist. Read from the owner's repository; not indexed by the appview.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": [
+          "name",
+          "createdAt"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 1000,
+            "maxGraphemes": 100
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "ref": "com.atproto.repo.strongRef"
+            },
+            "maxLength": 500
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      }
+    }
+  }
+}

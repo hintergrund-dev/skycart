@@ -1,0 +1,53 @@
+{
+  "lexicon": 1,
+  "id": "eu.skycart.catalog.getReviews",
+  "defs": {
+    "main": {
+      "type": "query",
+      "description": "Reviews with replies, newest first.",
+      "parameters": {
+        "type": "params",
+        "properties": {
+          "store": {
+            "type": "string",
+            "format": "did"
+          },
+          "item": {
+            "type": "string",
+            "format": "at-uri"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 25
+          },
+          "cursor": {
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "encoding": "application/json",
+        "schema": {
+          "type": "object",
+          "required": [
+            "reviews"
+          ],
+          "properties": {
+            "reviews": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "ref": "eu.skycart.defs#reviewView"
+              }
+            },
+            "cursor": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

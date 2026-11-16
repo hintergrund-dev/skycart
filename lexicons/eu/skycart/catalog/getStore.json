@@ -1,0 +1,37 @@
+{
+  "lexicon": 1,
+  "id": "eu.skycart.catalog.getStore",
+  "defs": {
+    "main": {
+      "type": "query",
+      "description": "Store profile, legal links and reputation.",
+      "parameters": {
+        "type": "params",
+        "required": [
+          "store"
+        ],
+        "properties": {
+          "store": {
+            "type": "string",
+            "description": "DID or handle."
+          }
+        }
+      },
+      "output": {
+        "encoding": "application/json",
+        "schema": {
+          "type": "object",
+          "required": [
+            "store"
+          ],
+          "properties": {
+            "store": {
+              "type": "ref",
+              "ref": "eu.skycart.defs#storeView"
+            }
+          }
+        }
+      }
+    }
+  }
+}

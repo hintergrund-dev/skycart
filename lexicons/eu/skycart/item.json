@@ -1,0 +1,156 @@
+{
+  "lexicon": 1,
+  "id": "eu.skycart.item",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "A product offer. Prices are integers in the smallest currency unit, gross including VAT.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": [
+          "title",
+          "priceCents",
+          "currency",
+          "vatRateBasisPoints",
+          "stockStatus",
+          "deliveryTime",
+          "condition",
+          "checkoutUrl",
+          "createdAt"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 2000,
+            "maxGraphemes": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 50000,
+            "maxGraphemes": 5000
+          },
+          "sku": {
+            "type": "string",
+            "maxLength": 640,
+            "maxGraphemes": 64
+          },
+          "groupId": {
+            "type": "string",
+            "maxLength": 640,
+            "maxGraphemes": 64,
+            "description": "Items of one shop with the same groupId are variants of one product."
+          },
+          "priceCents": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "currency": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3,
+            "description": "ISO 4217 code."
+          },
+          "vatRateBasisPoints": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000,
+            "description": "1900 = 19 %. 0 = no VAT shown (small-business rule)."
+          },
+          "basePriceInfo": {
+            "type": "string",
+            "maxLength": 1000,
+            "maxGraphemes": 100,
+            "description": "Price per unit for goods sold by weight or volume, e.g. \"19,90 € / 1 kg\"."
+          },
+          "stockStatus": {
+            "type": "string",
+            "knownValues": [
+              "in_stock",
+              "low_stock",
+              "out_of_stock",
+              "made_to_order"
+            ]
+          },
+          "deliveryTime": {
+            "type": "string",
+            "maxLength": 500,
+            "maxGraphemes": 50,
+            "description": "e.g. \"2-4 Werktage\"."
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "blob",
+              "accept": [
+                "image/jpeg",
+                "image/png",
+                "image/webp"
+              ],
+              "maxSize": 2000000
+            },
+            "maxLength": 8
+          },
+          "category": {
+            "type": "string",
+            "description": "One of the ids from eu.skycart.catalog.getCategories; unknown values are indexed as \"other\"."
+          },
+          "brand": {
+            "type": "string",
+            "maxLength": 2000,
+            "maxGraphemes": 200
+          },
+          "gtin": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 14,
+            "description": "8 to 14 digits."
+          },
+          "condition": {
+            "type": "string",
+            "knownValues": [
+              "new",
+              "used",
+              "refurbished"
+            ]
+          },
+          "manufacturer": {
+            "type": "object",
+            "description": "Product-safety contact.",
+            "required": [
+              "name",
+              "address",
+              "contact"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 2000,
+                "maxGraphemes": 200
+              },
+              "address": {
+                "type": "string",
+                "maxLength": 5000,
+                "maxGraphemes": 500
+              },
+              "contact": {
+                "type": "string",
+                "maxLength": 2000,
+                "maxGraphemes": 200
+              }
+            }
+          },
+          "checkoutUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "The page on the shop's own site where this item can be bought."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      }
+    }
+  }
+}

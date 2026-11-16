@@ -1,0 +1,6 @@
+packages:
+  - appview
+  - site
+allowBuilds:
+  esbuild: true
+  workerd: true

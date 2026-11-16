@@ -1,0 +1,59 @@
+{
+  "lexicon": 1,
+  "id": "eu.skycart.moderation.createReport",
+  "defs": {
+    "main": {
+      "type": "procedure",
+      "description": "Report an item, a review or a store.",
+      "input": {
+        "encoding": "application/json",
+        "schema": {
+          "type": "object",
+          "required": [
+            "subject",
+            "reason"
+          ],
+          "properties": {
+            "subject": {
+              "type": "string",
+              "maxLength": 2048,
+              "description": "AT URI or DID."
+            },
+            "reason": {
+              "type": "string",
+              "knownValues": [
+                "illegal-product",
+                "counterfeit",
+                "misleading",
+                "fraud",
+                "other"
+              ]
+            },
+            "text": {
+              "type": "string",
+              "maxLength": 10000
+            },
+            "contact": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        }
+      },
+      "output": {
+        "encoding": "application/json",
+        "schema": {
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }
+}

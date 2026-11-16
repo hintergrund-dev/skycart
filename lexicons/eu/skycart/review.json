@@ -1,0 +1,48 @@
+{
+  "lexicon": 1,
+  "id": "eu.skycart.review",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "A review of a shop or one of its items, published in the buyer's repository.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": [
+          "store",
+          "rating",
+          "createdAt"
+        ],
+        "properties": {
+          "store": {
+            "type": "string",
+            "format": "did"
+          },
+          "item": {
+            "type": "ref",
+            "ref": "com.atproto.repo.strongRef",
+            "description": "Omitted means the review is about the shop."
+          },
+          "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 50000,
+            "maxGraphemes": 5000
+          },
+          "proof": {
+            "type": "string",
+            "description": "Optional purchase proof issued by the shop (compact ES256 JWS)."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      }
+    }
+  }
+}
