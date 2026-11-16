@@ -16,7 +16,7 @@
 <header class="hero">
   <div class="wrap">
     <nav>
-      <strong>skycart.eu</strong>
+      <a class="brand" href={lang === 'de' ? '/' : '/en'}><img src="/favicon.svg" alt="" width="30" height="30" />skycart<i>.eu</i></a>
       <a href={c.nav.otherHref} hreflang={lang === 'de' ? 'en' : 'de'}>{c.nav.other}</a>
     </nav>
     <span class="label">{c.label}</span>
