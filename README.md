@@ -1,67 +1,40 @@
-<p>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="brand/logo-dark.svg">
-    <img src="brand/logo-light.svg" alt="skycart.eu" height="56">
-  </picture>
+<h1 align="center">
+  <picture><source media="(prefers-color-scheme: dark)" srcset="brand/logo-dark.svg"><img src="brand/logo-light.svg" alt="skycart.eu" height="64"></picture>
+</h1>
+
+<p align="center"><strong>Search independent European shops. Buy on their own websites.</strong><br>An open product index on atproto. No cart, no commission, no ads, no tracking.</p>
+
+<p align="center">
+  <a href="docs/plan.md">Plan</a> ·
+  <a href="lexicons/">Lexicons</a> ·
+  <a href="appview/">Appview</a> ·
+  <a href="brand/">Identity</a>
 </p>
 
-# skycart.eu
-
-**Status: proposal.** Nothing here is live.
-
-An open product search engine for independent European shops, built on atproto. Shops publish a
-store record and item records in their own atproto repository. The appview indexes them and offers
-search, product pages, shop pages and reviews. Buying happens on the shop's own website through each
-item's `checkoutUrl`: skycart has no cart, checkout, orders, accounts or payments, and no commission,
-ads or tracking.
-
-The specification is [`docs/plan.md`](docs/plan.md). Shops implement
-[`docs/shop-integration.md`](docs/shop-integration.md).
+> **Status: proposal.** Nothing here is live. The plan, the lexicons and a first appview are public so they can be discussed.
 
 ## How it works
 
-**Architecture**
+### Buying
 
-```mermaid
-flowchart LR
-  subgraph SH["Shop"]
-    W["Shop website<br/>checkout, imprint"]
-    R[("atproto repo<br/>store and item records")]
-  end
-  subgraph AV["Appview (skycart.eu)"]
-    I["Ingest<br/>Jetstream consumer"]
-    C["Store checks<br/>on arrival and daily"]
-    D[("D1 index<br/>full-text search")]
-    X["XRPC API"]
-    I --> D
-    C --> D
-    X <--> D
-  end
-  B["Buyer's browser"]
-  R -- "records" --> I
-  C -- "handle, imprint, EU country" --> W
-  B -- "search" --> X
-  B -- "Go to shop: checkoutUrl" --> W
-  R -. "images" .-> B
-```
+Every item carries a checkout URL on the shop's own site. skycart shows the item; the button opens the shop. skycart never learns whether a purchase happened or for how much.
 
-**Buying**
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/diagrams/flow-dark.svg"><img src="brand/diagrams/flow-light.svg" alt="Search on skycart, go to the shop, buy on the shop's own site" width="760"></picture></p>
 
-```mermaid
-sequenceDiagram
-  participant B as Buyer
-  participant A as skycart appview
-  participant W as Shop website
-  B->>A: searchItems(q)
-  A-->>B: items with price, VAT note, shipping link, delivery time
-  B->>W: "Go to shop" opens the item's checkoutUrl
-  Note over A: skycart is not involved from here on
-  B->>W: order and payment
-  W-->>B: confirmation, optional signed purchase proof
-  B-->>A: optional public review carrying the proof
-```
+### Why that is different
 
-**Listing a shop**
+A marketplace sits between buyer and shop, takes a commission and keeps the customer data. skycart is only an index.
+
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/diagrams/compare-dark.svg"><img src="brand/diagrams/compare-light.svg" alt="A marketplace sits between buyer and shop; skycart only points to the shop" width="760"></picture></p>
+
+### Architecture
+
+Shops publish one store record and one record per item in their own atproto repository. The appview indexes them, checks each shop daily and serves search. Images come from the shop's own atproto server.
+
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/diagrams/architecture-dark.svg"><img src="brand/diagrams/architecture-light.svg" alt="Shop website and repo, appview, browser" width="760"></picture></p>
+
+<details>
+<summary><strong>Protocol detail: when a shop is listed</strong></summary>
 
 ```mermaid
 flowchart TD
@@ -74,6 +47,18 @@ flowchart TD
   P -- yes --> L["Listed"]
   L -. "re-checked daily" .-> H
 ```
+
+</details>
+
+## Principles
+
+| | |
+|---|---|
+| **No commission** | No listing fees either. Funding is meant to come from public grants and donations. |
+| **No ads** | No sponsored placement. Ranking is text relevance plus a small boost for good verified-purchase reviews. |
+| **No tracking** | No cookies, no analytics, no third-party requests. |
+| **Shops keep their customers** | The sale, the data and the relationship stay with the shop. |
+| **Open** | Code and lexicons are open source; anyone can run another appview. |
 
 ## Layout
 

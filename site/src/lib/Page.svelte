@@ -1,7 +1,4 @@
 <script lang="ts">
-  import Architecture from './Architecture.svelte';
-  import Compare from './Compare.svelte';
-  import Steps from './Steps.svelte';
   import { ATPROTO, content, GITHUB, type Lang } from './content';
 
   let { lang }: { lang: Lang } = $props();
@@ -16,7 +13,7 @@
 <header class="hero">
   <div class="wrap">
     <nav>
-      <a class="brand" href={lang === 'de' ? '/' : '/en'}><img src="/favicon.svg" alt="" width="30" height="30" />skycart<i>.eu</i></a>
+      <a class="brand" href={lang === 'de' ? '/' : '/en'}><img src="/favicon.svg" alt="" width="30" height="30" /><span>skycart<i>.eu</i></span></a>
       <a href={c.nav.otherHref} hreflang={lang === 'de' ? 'en' : 'de'}>{c.nav.other}</a>
     </nav>
     <span class="label">{c.label}</span>
@@ -28,19 +25,19 @@
 <main class="wrap">
   <h2>{c.flow.h}</h2>
   {#each c.flow.p as p}<p>{p}</p>{/each}
-  <figure><Steps {lang} /></figure>
+  <figure><img class="diagram" src="/diagrams/flow.{lang}.svg" alt={c.flow.d.title} width="760" height="232" /></figure>
 
   <h2>{c.diff.h}</h2>
   {#each c.diff.p as p}<p>{p}</p>{/each}
-  <figure><Compare {lang} /></figure>
+  <figure><img class="diagram" src="/diagrams/compare.{lang}.svg" alt={c.diff.d.title} width="760" height="290" /></figure>
 
   <h2>{c.built.h}</h2>
   {#each c.built.p as p}<p>{p}</p>{/each}
-  <figure><Architecture {lang} /></figure>
+  <figure><img class="diagram" src="/diagrams/architecture.{lang}.svg" alt={c.built.d.title} width="760" height="290" /></figure>
 
   <h2>{c.principles.h}</h2>
-  <ul class="plain">
-    {#each c.principles.items as [name, text]}<li><strong>{name}:</strong> {text}</li>{/each}
+  <ul class="facts">
+    {#each c.principles.items as [name, text]}<li><strong>{name}</strong><span>{text}</span></li>{/each}
   </ul>
 
   <h2>{c.shops.h}</h2>
