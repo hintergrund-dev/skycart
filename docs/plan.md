@@ -166,10 +166,32 @@ Diagrams are inline SVG and work in light and dark mode.
 ## 8. Out of scope for now
 
 - The search web client.
-- The shop-side integration (later a one-time setup in hintergrund.cloud); only its spec exists.
+- The shop-side integration; only its spec exists. Planned as an open reference implementation
+  plus importers for common shop systems. Any shop system, open or closed, can implement the
+  same spec.
 - Any cart, checkout, order, account or payment feature.
 
-## 9. Open questions
+## 9. Planned next
+
+Not built yet. These are the next steps after the first appview.
+
+- **Adjustable ranking:** a buyer can set their own ranking preferences (for example: nearby
+  shops first, verified-purchase ratings weighted higher, used goods first) and can subscribe to
+  a ranking published by someone else, in the way Bluesky custom feeds work. The default ranking
+  stays the documented one from section 6.
+- **Labels for trust and moderation:** moderation decisions are published as atproto labels
+  instead of living only in the appview's database, so they are public and portable. Independent
+  labelers, such as a trade association or a consumer organisation, can issue their own labels
+  ("checked trader"), and buyers choose which labelers they trust. Domain-bound identity
+  (section 3) proves who controls a shop's domain, not that the business is sound; labels are
+  meant to close that gap.
+- **Moderation process:** rate limiting for reports, a notice to the shop with the reason when
+  something is hidden, a way to object, and a public log of decisions.
+- **Self-hosting:** the appview should also run without Cloudflare, on Node.js with SQLite, so
+  that a second operator is not tied to one provider.
+- **Search web client** and **shop integration** from section 8.
+
+## 10. Open questions
 
 - **Legal classification:** a lawyer should confirm that a search service that links to shops,
   without concluding contracts or seeing transactions, stays outside marketplace-operator duties
